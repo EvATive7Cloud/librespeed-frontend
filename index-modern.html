@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Clean, independent, open source speed test with real-time throughput charts and connection diagnostic." />
+  <link rel="shortcut icon" href="frontend/images/favicon.svg" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="images/icon-192.png" />
+  <meta name="theme-color" content="#0c0c0e" />
+  <title>EvATive7 Speed Test</title>
+
+  <link rel="stylesheet" type="text/css" href="frontend/styling/index.css?v=20261025-flat2" />
+  <script type="text/javascript" src="speedtest.js"></script>
+  <script type="text/javascript">
+    var SPEEDTEST_SERVERS = "server-list.json";
+    var SPEEDTEST_SETTINGS = "settings.json";
+    var SPEEDTEST_RESULTS = "results/";
+  </script>
+  <script type="text/javascript" src="frontend/javascript/index.js?v=20261025-flat2" defer></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="app-header">
+    <div class="brand-group">
+      <div class="brand-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline>
+        </svg>
+      </div>
+      <h1 class="brand-title">EvATive7 Speed Test</h1>
+    </div>
+
+    <nav class="header-links">
+      <a href="stability.html" class="header-link-btn">Stability Test</a>
+      <button class="header-link-btn privacy-trigger">Privacy</button>
+    </nav>
+  </header>
+
+  <!-- Main Dashboard -->
+  <main class="dashboard-container">
+    <div class="dashboard-grid">
+
+      <!-- Left Column: Primary Speed Telemetry & Waveform Charts -->
+      <section class="flat-card speed-card" aria-label="Speed Measurements">
+        <div class="card-title-bar">
+          <h2 class="card-heading">Your Internet Speed</h2>
+          <span class="card-subheading">Real-Time Throughput Benchmark</span>
+        </div>
+
+        <!-- Download Block -->
+        <div class="throughput-block">
+          <div class="throughput-header">
+            <span class="throughput-label">Download</span>
+            <span id="dl-status-tag" class="throughput-status-tag">Waiting</span>
+          </div>
+          <div class="throughput-val-row">
+            <span id="download-speed" class="throughput-num">0.00</span>
+            <span class="throughput-unit">Mbps</span>
+          </div>
+          <div class="throughput-percentile">throughput over time</div>
+          <div class="chart-container">
+            <canvas id="download-canvas" class="throughput-canvas"></canvas>
+          </div>
+        </div>
+
+        <!-- Upload Block -->
+        <div class="throughput-block">
+          <div class="throughput-header">
+            <span class="throughput-label">Upload</span>
+            <span id="ul-status-tag" class="throughput-status-tag">Waiting</span>
+          </div>
+          <div class="throughput-val-row">
+            <span id="upload-speed" class="throughput-num">0.00</span>
+            <span class="throughput-unit">Mbps</span>
+          </div>
+          <div class="throughput-percentile">throughput over time</div>
+          <div class="chart-container">
+            <canvas id="upload-canvas" class="throughput-canvas"></canvas>
+          </div>
+        </div>
+
+        <!-- Secondary Metrics Row: Latency, Jitter, Packet Loss -->
+        <div class="secondary-metrics-row">
+          <div class="secondary-metric-item">
+            <span class="secondary-metric-label">Latency</span>
+            <div class="secondary-metric-val-row">
+              <span id="ping" class="secondary-metric-val">--</span>
+              <span class="secondary-metric-unit">ms</span>
+            </div>
+          </div>
+          <div class="secondary-metric-item">
+            <span class="secondary-metric-label">Jitter</span>
+            <div class="secondary-metric-val-row">
+              <span id="jitter" class="secondary-metric-val">--</span>
+              <span class="secondary-metric-unit">ms</span>
+            </div>
+          </div>
+          <div class="secondary-metric-item">
+            <span class="secondary-metric-label">Packet Loss</span>
+            <div class="secondary-metric-val-row">
+              <span class="secondary-metric-val">N/A</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Controls Card (Above) & Server/Network Card (Below) -->
+      <div class="dashboard-side-column">
+
+        <!-- Top Block: Test Action & Phase Status -->
+        <section class="flat-card control-card" aria-label="Test Controls">
+          <div class="card-title-bar">
+            <h2 class="card-heading">Test Control</h2>
+            <span id="phase-text-label" class="phase-text-label">Ready to test</span>
+          </div>
+
+          <div class="test-control-actions">
+            <button id="start-button" class="btn-flat-primary btn-block">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+              </svg>
+              Start Speed Test
+            </button>
+
+            <div class="action-secondary-group">
+              <button id="copy-summary-btn" class="btn-flat-secondary hidden">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                </svg>
+                Copy Summary
+              </button>
+
+              <button id="share-results-btn" class="btn-flat-secondary hidden">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="18" cy="5" r="3"></circle>
+                  <circle cx="6" cy="12" r="3"></circle>
+                  <circle cx="18" cy="19" r="3"></circle>
+                  <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                  <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+                Share Results
+              </button>
+            </div>
+          </div>
+
+          <div class="phase-segment-track">
+            <div id="segment-ping" class="segment-item" title="Latency test"></div>
+            <div id="segment-download" class="segment-item" title="Download test"></div>
+            <div id="segment-upload" class="segment-item" title="Upload test"></div>
+          </div>
+        </section>
+
+        <!-- Bottom Block: Server Location & Network Telemetry -->
+        <aside class="flat-card server-card" aria-label="Connection Information">
+          <div class="card-title-bar">
+            <h2 class="card-heading">Server & Network</h2>
+            <span class="card-subheading">Endpoint Diagnostic</span>
+          </div>
+
+          <div class="meta-section">
+            <!-- Server Info -->
+            <div class="meta-group">
+              <span class="meta-label">Selected Test Server</span>
+              <div class="meta-row">
+                <span id="selected-server-name" class="meta-val-primary">Searching nearest server...</span>
+                <button id="server-change-btn" class="server-change-link">Change ▾</button>
+              </div>
+              <span id="selected-server-host" class="meta-val-secondary">Host: LibreSpeed Dedicated</span>
+            </div>
+
+            <!-- Connection Specs -->
+            <div class="connection-specs">
+              <div class="spec-line">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                  <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                  <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                  <line x1="6" y1="18" x2="6.01" y2="18"></line>
+                </svg>
+                <span>Server Location: <strong id="spec-server-location">Detecting...</strong></span>
+              </div>
+
+              <div class="spec-line">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+                <span>Your Network: <strong id="spec-client-isp">Detecting ISP...</strong></span>
+              </div>
+
+              <div class="spec-line">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                  <line x1="8" y1="21" x2="16" y2="21"></line>
+                  <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span>Your IP Address: <strong id="spec-client-ip">Resolving IP...</strong></span>
+              </div>
+            </div>
+
+            <!-- Diagnostic Features -->
+            <div class="meta-group" style="margin-top:0.25rem;">
+              <span class="meta-label">Protocol & Methodology</span>
+              <p style="font-size:0.8125rem;color:var(--text-secondary);line-height:1.6;">
+                Measures raw TCP throughput via chunked buffer streams. Latency is calculated through consecutive HTTP round-trip ping samples to assess bufferbloat stability.
+              </p>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="app-footer">
+    <div class="footer-copyright">
+      LibreSpeed Open Source Speedtest · LGPLv3
+    </div>
+    <nav class="footer-nav">
+      <a href="stability.html">Stability Test</a>
+      <a href="https://github.com/librespeed/speedtest" target="_blank" rel="noopener">GitHub</a>
+      <button class="privacy-trigger">Privacy Policy</button>
+    </nav>
+  </footer>
+
+  <!-- Server Selection Modal -->
+  <dialog id="server-dialog" aria-labelledby="server-dialog-title">
+    <div class="dialog-header">
+      <h2 id="server-dialog-title" class="dialog-title">Select Test Server</h2>
+      <button class="dialog-close-btn" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <input type="search" id="server-search-input" class="server-search-input" placeholder="Search servers by name or sponsor..." autocomplete="off" />
+    <ul id="server-modal-list" class="server-modal-list"></ul>
+  </dialog>
+
+  <!-- Share Results Modal -->
+  <dialog id="share-dialog" aria-labelledby="share-dialog-title">
+    <div class="dialog-header">
+      <h2 id="share-dialog-title" class="dialog-title">Share Test Results</h2>
+      <button class="dialog-close-btn" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="share-modal-body">
+      <img id="results-image" class="share-image-preview" src="" alt="Test Results Card" />
+      <button id="copy-link-btn" class="btn-flat-primary">Copy Image Link</button>
+    </div>
+  </dialog>
+
+  <!-- Privacy Policy Modal -->
+  <dialog id="privacy-dialog" aria-labelledby="privacy-dialog-title">
+    <div class="dialog-header">
+      <h2 id="privacy-dialog-title" class="dialog-title">Privacy Policy</h2>
+      <button class="dialog-close-btn" aria-label="Close dialog">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="privacy-body">
+      <h2>Data Collection</h2>
+      <p>
+        When telemetry is enabled, test results (speeds, ping, jitter, client IP, timestamp) are stored solely to generate shareable benchmark images and troubleshoot server congestion.
+      </p>
+      <h2>Data Protection</h2>
+      <p>
+        No tracking cookies, browsing history, or personal identifiers are logged. Benchmark data is never sold or shared with advertisers.
+      </p>
+    </div>
+    <div class="dialog-footer">
+      <button class="btn-flat-secondary dialog-cancel-btn">Close</button>
+    </div>
+  </dialog>
+</body>
+</html>

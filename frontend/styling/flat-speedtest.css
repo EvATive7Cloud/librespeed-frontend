@@ -1,0 +1,484 @@
+/**
+ * Flat Speedtest Dashboard Styles
+ * Clean, flat, high-contrast, informative layout with real-time throughput area charts
+ * Bold, prominent typography matching Cloudflare Speed Test scale
+ */
+
+/* Main 2-Column Grid */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+}
+
+/* Right Side Column containing Controls Card & Server Card */
+.dashboard-side-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Flat Card Container (Large, bold, spacious) */
+.flat-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.65rem 1.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.card-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 0.75rem;
+}
+
+.card-heading {
+  font-size: 1.0625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.card-subheading {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+}
+
+/* Throughput Measurement Blocks (Download & Upload) */
+.throughput-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.throughput-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.throughput-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: capitalize;
+}
+
+.throughput-status-tag {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.throughput-status-tag.active {
+  color: var(--chart-dl-line);
+}
+
+.throughput-status-tag.active-upload {
+  color: var(--chart-ul-line);
+}
+
+.throughput-status-tag.completed {
+  color: var(--color-success);
+}
+
+/* Value row: Large bold prominent number (Cloudflare scale) */
+.throughput-val-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.throughput-num {
+  font-size: 3.25rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+}
+
+.throughput-unit {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.throughput-percentile {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  margin-top: -0.2rem;
+}
+
+/* Real-Time Area Line Chart Canvas (Spacious, generous view) */
+.chart-container {
+  width: 100%;
+  height: 96px;
+  position: relative;
+  background-color: #0e0e10;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.throughput-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Secondary Metrics Row (Latency, Jitter, Packet Loss) */
+.secondary-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.secondary-metric-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.secondary-metric-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: capitalize;
+}
+
+.secondary-metric-val-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.secondary-metric-val {
+  font-size: 1.625rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.secondary-metric-unit {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* TOP CONTROL BLOCK (In Right Column) */
+.control-card {
+  padding: 1.5rem 1.75rem;
+  gap: 1rem;
+}
+
+.test-control-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.action-secondary-group {
+  display: flex;
+  gap: 0.65rem;
+  width: 100%;
+}
+
+.action-secondary-group .btn-flat-secondary {
+  flex: 1;
+}
+
+/* Flat Buttons (Bold, confident, zero hover movement) */
+.btn-flat-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  background-color: #ffffff;
+  color: #0c0c0e;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: inherit;
+  border: 1px solid #ffffff;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background-color var(--trans-fast), border-color var(--trans-fast);
+}
+
+.btn-flat-primary.btn-block {
+  width: 100%;
+  height: 48px;
+}
+
+.btn-flat-primary:hover {
+  background-color: #e4e4e7;
+  border-color: #e4e4e7;
+}
+
+.btn-flat-primary:active {
+  transform: scale(0.985);
+}
+
+.btn-flat-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: none;
+  height: 38px;
+  transition: background-color var(--trans-fast), border-color var(--trans-fast);
+}
+
+.btn-flat-secondary:hover {
+  background-color: var(--border-hover);
+  border-color: var(--border-hover);
+}
+
+.btn-flat-secondary:active {
+  transform: scale(0.985);
+}
+
+.btn-flat-secondary.copied {
+  border-color: var(--color-success);
+  color: var(--color-success);
+}
+
+.btn-flat-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: var(--radius-sm);
+  background-color: transparent;
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  width: 100%;
+  height: 48px;
+  transition: background-color var(--trans-fast);
+}
+
+.btn-flat-danger:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+}
+
+/* Discrete Segmented Phase Indicator */
+.phase-segment-track {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  margin-top: 0.25rem;
+}
+
+.segment-item {
+  flex: 1;
+  height: 6px;
+  border-radius: 3px;
+  background-color: var(--border-subtle);
+  transition: background-color var(--trans-normal);
+}
+
+.segment-item.active {
+  background-color: var(--chart-dl-line);
+}
+
+.segment-item.active-upload {
+  background-color: var(--chart-ul-line);
+}
+
+.segment-item.completed {
+  background-color: var(--color-success);
+}
+
+.phase-text-label {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* SERVER & CONNECTION DETAILS */
+.meta-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.meta-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.meta-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.meta-val-primary {
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meta-val-secondary {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.server-change-link {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-info);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--trans-fast);
+}
+
+.server-change-link:hover {
+  background-color: var(--bg-elevated);
+}
+
+.connection-specs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: 0.85rem 1.1rem;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.spec-line {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.spec-line svg {
+  width: 15px;
+  height: 15px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.spec-line strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Responsive Layout */
+@media screen and (max-width: 960px) {
+  .dashboard-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+
+  .dashboard-side-column {
+    display: contents;
+  }
+
+  /* Mobile Card Ordering: Test Control is #1 (Top) */
+  .control-card {
+    order: 1;
+  }
+
+  .speed-card {
+    order: 2;
+  }
+
+  .server-card {
+    order: 3;
+  }
+
+  /* Mobile Card Styling: Remove background & border, text directly on background */
+  .flat-card,
+  .control-card {
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    gap: 0.95rem;
+    box-shadow: none;
+  }
+
+  .card-title-bar {
+    padding-bottom: 0.5rem;
+  }
+
+  .connection-specs {
+    background-color: transparent;
+    border: none;
+    padding: 0.25rem 0;
+    gap: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .secondary-metrics-row {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .secondary-metric-val {
+    font-size: 1.35rem;
+  }
+
+  .throughput-num {
+    font-size: 2.25rem;
+  }
+
+  .chart-container {
+    height: 84px;
+  }
+
+  .action-secondary-group {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+}

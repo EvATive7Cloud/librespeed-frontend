@@ -1,0 +1,184 @@
+/**
+ * Flat Modal Dialogs
+ * Clean, flat, high-contrast modals
+ */
+
+dialog {
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-lg);
+  background-color: var(--bg-modal);
+  color: var(--text-primary);
+  padding: 1.5rem;
+  max-width: 520px;
+  width: calc(100% - 2rem);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.7);
+  margin: auto;
+  position: fixed;
+  inset: 0;
+  outline: none;
+}
+
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+.dialog-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.dialog-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.dialog-close-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  transition: color var(--trans-fast), background-color var(--trans-fast);
+}
+
+.dialog-close-btn:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-elevated);
+}
+
+.dialog-close-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* SERVER SELECTION MODAL */
+.server-search-input {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-medium);
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.875rem;
+  outline: none;
+  margin-bottom: 1rem;
+}
+
+.server-search-input:focus {
+  border-color: var(--border-focus);
+}
+
+.server-modal-list {
+  list-style: none;
+  max-height: 48vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.server-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: background-color var(--trans-fast), border-color var(--trans-fast);
+}
+
+.server-list-item:hover {
+  background-color: var(--bg-elevated);
+  border-color: var(--border-medium);
+}
+
+.server-list-item.selected {
+  border-color: var(--color-info);
+  background-color: var(--bg-elevated);
+}
+
+.server-item-name {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.server-item-sponsor {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.server-item-ping {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background-color: var(--bg-canvas);
+  border: 1px solid var(--border-subtle);
+  color: var(--color-success);
+}
+
+/* SHARE MODAL */
+.share-modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.share-image-preview {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background-color: #000000;
+}
+
+/* PRIVACY MODAL */
+.privacy-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.privacy-body h2 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-top: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+.privacy-body p {
+  margin-bottom: 0.65rem;
+}
+
+.privacy-body ul {
+  padding-left: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.privacy-body a {
+  color: var(--color-info);
+}
+
+.dialog-footer {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: flex-end;
+}

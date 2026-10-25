@@ -1,0 +1,54 @@
+/**
+ * Flat Modern Design Tokens
+ * Clean, flat, high-contrast, zero faux-tech neon glow
+ */
+
+:root {
+  /* Flat Neutral Canvas & Surfaces */
+  --bg-canvas: #0c0c0e;
+  --bg-card: #141416;
+  --bg-card-header: #17171a;
+  --bg-card-hover: #19191d;
+  --bg-elevated: #1e1e22;
+  --bg-modal: #141416;
+
+  /* Hairline Flat 1px Borders */
+  --border-subtle: #202024;
+  --border-medium: #2a2a30;
+  --border-hover: #3a3a42;
+  --border-focus: #ffffff;
+
+  /* Typography */
+  --text-primary: #f4f4f5;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-dim: #52525b;
+  --text-inverse: #0c0c0e;
+
+  /* Chart & Telemetry Waveform Accents */
+  --chart-dl-line: #f97316;
+  --chart-dl-fill: rgba(249, 115, 22, 0.12);
+  --chart-ul-line: #8b5cf6;
+  --chart-ul-fill: rgba(139, 92, 246, 0.12);
+  --chart-grid: rgba(255, 255, 255, 0.05);
+
+  /* Functional Accents */
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #0ea5e9;
+
+  /* Typography */
+  --font-main: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  --font-mono: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", monospace;
+
+  /* Border Radiuses */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 9999px;
+
+  /* Transitions - strictly color and background, NO hover movement */
+  --trans-fast: 0.15s ease;
+  --trans-normal: 0.2s ease;
+}

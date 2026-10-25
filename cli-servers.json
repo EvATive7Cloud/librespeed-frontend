@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "name": "EvATive7 Speed Test",
+    "server": "https://speed.evative7.host/backend/",
+    "dlURL": "garbage.php",
+    "ulURL": "empty.php",
+    "pingURL": "empty.php",
+    "getIpURL": "getIP.php"
+  }
+]

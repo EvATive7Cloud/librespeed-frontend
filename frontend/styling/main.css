@@ -1,0 +1,214 @@
+/**
+ * Base Reset, Typography & App Shell
+ * Flat, minimalist layout with fixed desktop viewport (no scroll)
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  background-color: var(--bg-canvas);
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  width: 100%;
+  background-color: var(--bg-canvas);
+  font-family: var(--font-main);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
+}
+
+/* On Desktop: Fix page within viewport (strictly no scrollbar) */
+@media screen and (min-width: 961px) and (min-height: 620px) {
+  html,
+  body {
+    height: 100vh;
+    max-height: 100vh;
+    overflow-y: hidden;
+  }
+}
+
+/* Fallback for smaller screens / mobile */
+@media screen and (max-width: 960px), screen and (max-height: 619px) {
+  html,
+  body {
+    min-height: 100vh;
+    height: auto;
+    overflow-y: auto;
+  }
+}
+
+/* Tabular numbers for all telemetry data */
+.tabular-nums,
+[id*="speed"],
+#ping,
+#jitter,
+.metric-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1, "cv05" 1;
+}
+
+/* Top App Header */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 2.25rem;
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.brand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-icon {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+}
+
+.brand-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.brand-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.header-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.header-link-btn {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--trans-fast), background-color var(--trans-fast);
+}
+
+.header-link-btn:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-card);
+}
+
+/* Main Dashboard Container (Vertically Centered on Desktop) */
+.dashboard-container {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 1.25rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Footer */
+.app-footer {
+  padding: 1rem 2.25rem;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1260px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.footer-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.footer-nav a,
+.footer-nav button {
+  color: var(--text-muted);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  transition: color var(--trans-fast);
+}
+
+.footer-nav a:hover,
+.footer-nav button:hover {
+  color: var(--text-primary);
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media screen and (max-width: 768px), screen and (orientation: portrait) and (max-width: 1024px) {
+  .app-header {
+    padding: 0.9rem 1.15rem;
+  }
+  .app-header .header-links {
+    display: none !important;
+  }
+  .dashboard-container {
+    padding: 0.85rem 1.15rem;
+  }
+  .app-footer {
+    padding: 0.9rem 1.15rem;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .app-header {
+    padding: 0.75rem 1rem;
+  }
+  .dashboard-container {
+    padding: 0.65rem 0.95rem;
+  }
+  .app-footer {
+    padding: 0.75rem 1rem;
+  }
+}
